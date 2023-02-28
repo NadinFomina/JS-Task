@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //#1_Фильтрация уникальных элементов массива
+        //Допустим, у нас есть массив arr.
+        //Создайте функцию unique(arr), которая вернёт массив уникальных, 
+        //не повторяющихся значений массива arr.
+        //P.S. Здесь мы используем строки, но значения могут быть любого типа.
+        //P.P.S. Используйте Set для хранения уникальных значений.
+
+        function unique(arr) {
+            return Array.from(new Set(arr));
+        }
+        let values = ["Hare", "Krishna", "Hare", "Krishna",
+            "Krishna", "Krishna", "Hare", "Hare", ":-O"
+        ];
+
+        alert(unique(values));
+
+        //#2._Отфильтруйте анаграммы
+
+        //Анаграммы – это слова, у которых те же буквы в том же количестве,
+        //но они располагаются в другом порядке.
+        //Напишите функцию aclean(arr), которая возвращает массив слов, очищенный от анаграмм.
+        let arr = ["nap", "teachers", "cheaters", "PAN", "ear", "era", "hectares"];
+        function aclean(arr) {
+            let map = new Map();
+            for (let el of arr) {
+                let sortArr = el.toLowerCase().split("").sort().join("");
+                map.set(sortArr, el);
+            }
+            return Array.from(map.values());
+        }
+        alert(aclean(arr)); // "nap,teachers,ear" или "PAN,cheaters,era"
+
+        //3._Перебираемые ключи
+        // Мы хотели бы получить массив ключей map.keys()
+        //в переменную и далее работать с ними, например, применить метод .push.
+        //Но это не выходит:
+        let map = new Map();
+        map.set("name", "John");
+        let keys = map.keys();
+        // Error: keys.push is not a function
+        // Ошибка: keys.push -- это не функция
+        keys.push("more");
+
+        //Ответ:
+        // Это потому что map.keys() возвращает итерируемый объект, а не массив.
+        //Мы можем конвертировать его в массив с помощью Array.from:
+
+        let map1 = new Map();
+
+        map1.set("name", "John");
+
+        let keys1 = Array.from(map.keys());
+
+        keys1.push("more");
+
+        alert(keys1); // name, more
+    </script>
+</body>
+
+</html>
