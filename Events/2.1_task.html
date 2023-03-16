@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .menu ul {
+            margin: 0;
+            list-style: none;
+            padding-left: 20px;
+            display: none;
+
+        }
+
+        .menu .title {
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .menu .title::before {
+            content: '▶ ';
+            font-size: 80%;
+            color: green;
+        }
+
+        .menu.open .title::before {
+            content: '▼ ';
+        }
+
+        .menu.open ul {
+            display: block;
+        }
+
+        .box__pane {
+            background: #edf5e1;
+            padding: 10px 20px 10px;
+            border-top: 2px solid #c4df9b;
+            position: relative;
+        }
+
+        .box__title {
+            margin: 0;
+            padding-bottom: .3em;
+            font-size: 1.1em;
+        }
+
+        .box__text {
+            margin: 0;
+            padding: 0 0 .5em;
+        }
+
+        .remove-button {
+            font-size: 110%;
+            color: darkred;
+            right: 10px;
+            top: 2px;
+            width: 24px;
+            height: 24px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            display: none;
+        }
+
+        .carousel {
+            position: relative;
+            width: 398px;
+            padding: 10px 40px;
+            border: 1px solid #CCC;
+            border-radius: 15px;
+            background: #eee;
+        }
+
+        .carousel img {
+            width: 130px;
+            height: 130px;
+            /* делаем этот элемент блочным, чтобы убрать лишнее пространство вокруг картинок */
+            display: block;
+        }
+
+        .arrow {
+            position: absolute;
+            top: 60px;
+            padding: 0;
+            background: #ddd;
+            border-radius: 15px;
+            border: 1px solid gray;
+            font-size: 24px;
+            line-height: 24px;
+            color: #444;
+            display: block;
+        }
+
+        .arrow:focus {
+            outline: none;
+        }
+
+        .arrow:hover {
+            background: #ccc;
+            cursor: pointer;
+        }
+
+        .prev {
+            left: 7px;
+        }
+
+        .next {
+            right: 7px;
+        }
+
+        .gallery {
+            width: 390px;
+            overflow: hidden;
+        }
+
+        .gallery ul {
+            height: 130px;
+            width: 9999px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            transition: margin-left 250ms;
+            /* удаляем пустое пространство между элементами li, у которых установлен inline-block */
+            /* http://davidwalsh.name/remove-whitespace-inline-block */
+            font-size: 0;
+        }
+
+        .gallery li {
+            display: inline-block;
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <!-- #1 -->
+    <button id="hider">Нажмите, чтобы спрятать текст</button>
+    <div id="text">Текст</div>
+
+    <!-- #2 -->
+
+    <button id="hider2">Нажми меня и я спрячусь</button>
+
+    <!-- #5 -->
+    <div id="sweeties" class="menu">
+        <span class="title">Сладости (нажми меня)!</span>
+        <ul>
+            <li>Пирожное</li>
+            <li>Пончик</li>
+            <li>Мёд</li>
+        </ul>
+
+    </div>
+
+    <!-- #6 -->
+
+    <main class="main">
+        <button class="remove-button">[x]</button>
+        <div class="box">
+            <div class="box__pane">
+                <h3 class="box__title">Лошадь</h3>
+
+                Домашняя лошадь — животное семейства непарнокопытных, одомашненный и единственный сохранившийся подвид
+                дикой лошади, вымершей в дикой природе, за исключением небольшой популяции лошади Пржевальского.
+
+
+            </div>
+            <div class="box__pane">
+                <h3 class="box__title">Осёл</h3>
+                Домашний осёл (лат. Equus asinus asinus), или ишак, — одомашненный подвид дикого осла (Equus asinus),
+                сыгравший важную историческую роль в развитии хозяйства и культуры человека и по-прежнему широко в
+                хозяйстве многих развивающихся стран.
+
+
+            </div>
+            <div class="box__pane">
+                <h3 class="box__title">Кошка</h3>
+                Кошка, или домашняя кошка (лат. Felis silvestris catus), — домашнее животное, одно из наиболее
+                популярных(наряду с собакой) «животных-компаньонов». Являясь одиночным охотником на грызунов и других
+                мелких животных, кошка — социальное животное, использующее для общения широкий диапазон звуковых
+                сигналов.
+
+
+            </div>
+        </div>
+
+    </main>
+    <div id="carousel" class="carousel">
+        <button class="arrow prev">⇦</button>
+        <div class="gallery">
+            <ul>
+                <li><img src="https://ru.js.cx/carousel/1.png"></li>
+                <li><img src="https://ru.js.cx/carousel/2.png"></li>
+                <li><img src="https://ru.js.cx/carousel/3.png"></li>
+                <li><img src="https://ru.js.cx/carousel/4.png"></li>
+                <li><img src="https://ru.js.cx/carousel/5.png"></li>
+                <li><img src="https://ru.js.cx/carousel/6.png"></li>
+                <li><img src="https://ru.js.cx/carousel/7.png"></li>
+                <li><img src="https://ru.js.cx/carousel/8.png"></li>
+                <li><img src="https://ru.js.cx/carousel/9.png"></li>
+                <li><img src="https://ru.js.cx/carousel/10.png"></li>
+            </ul>
+        </div>
+        <button class="arrow next">⇨</button>
+    </div>
+    <!-- <script src="js/script.js"></script> -->
+    </div>
+    <script>
+        // #1_Добавьте JavaScript к кнопке button, чтобы при нажатии элемент <div id="text"> исчезал.
+        let btnHidden = document.getElementById('hider');
+        btnHidden.onclick = function () {
+            document.getElementById('text').hidden = true;
+        }
+
+        // #2_Создайте кнопку, которая будет скрывать себя по нажатию
+        let btn2 = document.getElementById('hider2');
+        btn2.onclick = function () {
+            btn2.style.display = 'none';
+        }
+
+        // #3_
+        //             В переменной button находится кнопка. Изначально на ней нет обработчиков.
+        // Который из обработчиков запустится? Что будет выведено при клике после выполнения кода?
+
+        // button.addEventListener("click", () => alert("1"));// сработает
+        // button.removeEventListener("click", () => alert("1"));
+        // button.onclick = () => alert(2);//сработает
+
+        //#4_
+        //Пусть мяч перемещается при клике на поле, туда, куда был клик, вот так:
+
+        // Мы не можем использовать position:fixed, поскольку прокрутка страницы будет перемещать мяч с поля.
+        // Правильнее использовать position:absolute, и, чтобы сделать позиционирование действительно надёжным, 
+        // сделаем само поле (field) позиционированным.
+        // Далее мы должны назначить корректные значения ball.style.left/top. 
+        // Сейчас они содержат координаты относительно поля.
+
+        // field.onclick = function (event) {
+
+        //     // координаты поля относительно окна браузера
+        //     let fieldCoords = this.getBoundingClientRect();
+
+        //     // мяч имеет абсолютное позиционирование (position:absolute), поле - относительное (position:relative)
+        //     // таким образом, координаты мяча рассчитываются относительно внутреннего, верхнего левого угла поля
+        //     let ballCoords = {
+        //         top: event.clientY - fieldCoords.top - field.clientTop - ball.clientHeight / 2,
+        //         left: event.clientX - fieldCoords.left - field.clientLeft - ball.clientWidth / 2
+        //     };
+
+        //     // запрещаем пересекать верхнюю границу поля
+        //     if (ballCoords.top < 0) ballCoords.top = 0;
+
+        //     // запрещаем пересекать левую границу поля
+        //     if (ballCoords.left < 0) ballCoords.left = 0;
+
+
+        //     // // запрещаем пересекать правую границу поля
+        //     if (ballCoords.left + ball.clientWidth > field.clientWidth) {
+        //         ballCoords.left = field.clientWidth - ball.clientWidth;
+        //     }
+
+        //     // запрещаем пересекать нижнюю границу поля
+        //     if (ballCoords.top + ball.clientHeight > field.clientHeight) {
+        //         ballCoords.top = field.clientHeight - ball.clientHeight;
+        //     }
+
+        //     ball.style.left = ballCoords.left + 'px';
+        //     ball.style.top = ballCoords.top + 'px';
+        // }
+
+        // #5_
+        // Создать меню, которое по нажатию открывается либо закрывается:
+        let menuElem = document.getElementById('sweeties');
+        let titleElem = menuElem.querySelector('.title');
+
+        titleElem.onclick = function () {
+            menuElem.classList.toggle('open');
+        };
+
+        // #6
+        // Есть список сообщений.
+        // При помощи JavaScript для каждого сообщения добавьте в верхний правый угол кнопку закрытия.
+
+
+        // for (let pane of panes) {
+        //     pane.insertAdjacentHTML("afterbegin", '<button class="remove-button">[x]</button>');
+        //     // кнопка становится первым потомком плитки (pane)
+        //     pane.firstChild.onclick = () => pane.remove();
+        // }
+
+        let panes = document.querySelectorAll('.pane');
+      
+
+        for (let pane of panes) {
+            const panes = document.querySelectorAll('.box__pane');
+            const button = document.querySelector('.remove-button');
+            panes.prepend(button);
+            button.style.display = 'block';
+            button.style.position = 'absolute';
+            button.onclick = () => pane.style.display = 'none';
+        }
+
+        // #7
+        // Создайте «Карусель» –- ленту изображений, которую можно листать влево-вправо нажатием на стрелочки.
+        let i = 1;
+        for (let li of carousel.querySelectorAll('li')) {
+            li.style.position = 'relative';
+            li.insertAdjacentHTML('beforeend', `<span style="position:absolute;left:0;top:0">${i}</span>`);
+            i++;
+        }
+
+        /* конфигурация */
+        let width = 130; // ширина картинки
+        let count = 3; // видимое количество изображений
+
+        let list = carousel.querySelector('ul');
+        let listElems = carousel.querySelectorAll('li');
+
+        let position = 0; // положение ленты прокрутки
+
+        carousel.querySelector('.prev').onclick = function () {
+            // сдвиг влево
+            position += width * count;
+            // последнее передвижение влево может быть не на 3, а на 2 или 1 элемент
+            position = Math.min(position, 0)
+            list.style.marginLeft = position + 'px';
+        };
+
+        carousel.querySelector('.next').onclick = function () {
+            // сдвиг вправо
+            position -= width * count;
+            // последнее передвижение вправо может быть не на 3, а на 2 или 1 элемент
+            position = Math.max(position, -width * (listElems.length - count));
+            list.style.marginLeft = position + 'px';
+        };
+    </script>
+</body>
+
+</html>

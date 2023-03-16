@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+//#1_Получите атрибут/Напишите код для выбора элемента
+//с атрибутом data-widget-name из документа и прочитайте его значение.
+// <!DOCTYPE html>
+// <html>
+// <body>
+
+//   <div data-widget-name="menu">Choose the genre</div>
+
+//   <script>
+//     /* your code */
+//   </script>
+    //
+</body>
+//
+
+</html>
+
+<!-- //Answer -->
+<script>
+    // получаем элемент
+    let elem = document.querySelector('[data-widget-name]');
+
+    // читаем значение
+    alert(elem.dataset.widgetName);
+    // или так
+    alert(elem.getAttribute('data-widget-name'));
+</script>
+
+<!-- //#2_Сделайте внешние ссылки оранжевыми -->
+<!-- Сделайте все внешние ссылки оранжевыми, изменяя их свойство style.
+
+  Ссылка является внешней, если:
+  
+  Её href содержит ://
+  Но не начинается с http://internal.com. -->
+
+<!-- Answer -->
+<script>
+    let links = document.querySelectorAll('a');
+
+    for (let link of links) {
+        let href = link.getAttribute('href');
+        if (!href) continue; // нет атрибута
+
+        if (!href.includes('://')) continue; // нет протокола
+
+        if (href.startsWith('http://internal.com')) continue; // внутренняя
+
+        link.style.color = 'orange';
+    }</script>
+</script>
+</body>
+
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //#1_Считаем потомков
+        // У нас есть дерево, структурированное как вложенные списки ul / li.
+        // Напишите код, который выведет каждый элемент списка < li >:
+        // Какой в нём текст(без поддерева) ?
+        //  Какое число потомков – всех вложенных < li > (включая глубоко вложенные) ?
+
+        //Answer
+        //Пройдём циклом по всем элементам <li>:
+
+        for (let li of document.querySelectorAll('li')) {
+            //  ...
+        }
+        // В цикле нам нужно получить текст в каждом элементе li.
+        // Мы можем прочитать текстовое содержимое элемента списка из первого дочернего узла li, 
+        // который будет текстовым узлом:
+
+        for (let li of document.querySelectorAll('li')) {
+            let title = li.firstChild.data;
+
+            // переменная title содержит текст элемента <li>
+        }
+        // Так мы сможем получить количество потомков как li.getElementsByTagName('li').length.
+
+        //#2_Что содержит свойство nodeType?
+        //Что выведет этот код ?
+//    <html>
+//    <body>
+//    <script>alert(document.body.lastChild.nodeType)</script>
+
+
+    <!-- </body> -->
+    <!-- </html> -->
+
+    <!-- //Answer -->
+    <!-- Во время выполнения <script> последним DOM-узлом является <script>,
+         потому что браузер ещё не обработал остальную часть страницы.
+       Поэтому результатом будет 1 (узел-элемент). -->
+
+    <!-- //#3_Что выведет этот код? -->
+
+    <script>
+        let body = document.body;
+        body.innerHTML = "<!--" + body.tagName + "-->";
+        alert(body.firstChild.data); // что выведет?
+    </script>
+<!-- Answer: -->
+<!-- выведет BODY -->
+
+<!-- #4_ -->
+<!-- Объектом какого класса является document?- 
+alert(document); // [object HTMLDocument] -->
+
+<!-- Какое место он занимает в DOM-иерархии?
+- alert(HTMLDocument.prototype.constructor === HTMLDocument); // true -->
+
+<!-- Наследует ли он от Node или от Element, или может от HTMLElement?-
+alert(HTMLDocument.prototype.constructor.name); // HTMLDocument
+alert(HTMLDocument.prototype.__proto__.constructor.name); // Document
+alert(HTMLDocument.prototype.__proto__.__proto__.constructor.name); // Node -->
+    </script>
+</body>
+
+</html>

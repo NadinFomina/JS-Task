@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // #1_
+        // В коде ниже мы создаём нового кролика new Rabbit, а потом пытаемся изменить его прототип.
+        // function Rabbit() { }
+        // Rabbit.prototype = {
+        //     eats: true
+        // };
+        // let rabbit = new Rabbit();
+        // alert(rabbit.eats); // true
+
+        // 1.Добавим одну строчку (выделенную в коде ниже). Что вызов alert покажет нам сейчас?
+        // function Rabbit() { }
+        // Rabbit.prototype = {
+        //     eats: true
+        // };
+
+        // let rabbit = new Rabbit();
+
+        // Rabbit.prototype = {};
+
+        // alert(rabbit.eats); // ?
+        // answer: true.  
+        // Присвоение нового значения свойству Rabbit.prototype влияет на [[Prototype]] вновь
+        // создаваемых объектов, но не на прототип уже существующих.
+
+        // 2.А если код такой (заменили одну строчку)?
+
+        // function Rabbit() { }
+        // Rabbit.prototype = {
+        //     eats: true
+        // };
+
+        // let rabbit = new Rabbit();
+
+        // Rabbit.prototype.eats = false;
+
+        // alert(rabbit.eats); // ?
+
+        // answer:false.
+
+        // Объекты присваиваются по ссылке. Не создаётся копия Rabbit.prototype, 
+        // это всегда один объект, на который ссылается и Rabbit.prototype, и [[Prototype]] объекта rabbit.
+        // Таким образом, когда мы изменяем этот объект по одной ссылке, изменения видны и по другой.
+
+        // 3.Или такой (заменили одну строчку)?
+
+        // function Rabbit() { }
+        // Rabbit.prototype = {
+        //     eats: true
+        // };
+
+        // let rabbit = new Rabbit();
+
+        // delete rabbit.eats;
+
+        // alert(rabbit.eats); // ?
+
+        // answer: true.  
+
+        // Операция delete применяется к свойствам конкретного объекта, на котором она вызвана. 
+        // Здесь delete rabbit.eats пытается удалить свойство eats из объекта rabbit, но его там нет.
+        //  Таким образом, просто ничего не произойдёт.
+
+        // 4.Или, наконец, такой:
+
+        function Rabbit() { }
+        Rabbit.prototype = {
+            eats: true
+        };
+
+        let rabbit = new Rabbit();
+
+        delete Rabbit.prototype.eats;
+
+        alert(rabbit.eats); // ?
+
+        //answer: undefined.
+        // Свойство eats удалено из прототипа, оно больше не существует.
+
+
+        // #2_
+        // Представьте, что у нас имеется некий объект obj, созданный функцией-конструктором – мы не знаем
+        //  какой именно, но хотелось бы создать ещё один объект такого же типа.
+        // Можем ли мы сделать так?
+        // let obj2 = new obj.constructor();
+        // Приведите пример функции-конструктора для объекта obj, с которой такой вызов корректно сработает.
+        //  И пример функции-конструктора, с которой такой код поведёт себя неправильно.
+
+        function User(name) {
+            this.name = name;
+        }
+
+        let user = new User('John');
+        let user2 = new user.constructor('Pete');
+
+        alert(user2.name); // Pete (сработало!)
+    </script>
+</body>
+
+</html>

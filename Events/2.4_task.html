@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #largeImg {
+            border: solid 1px #ccc;
+            width: 550px;
+            height: 400px;
+            padding: 5px;
+        }
+
+        #thumbs a {
+            border: solid 1px #ccc;
+            width: 100px;
+            height: 100px;
+            padding: 3px;
+            margin: 2px;
+            float: left;
+        }
+
+        #thumbs a:hover {
+            border-color: #FF9900;
+        }
+
+        #thumbs li {
+            list-style: none;
+        }
+
+        #thumbs {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 1 -->
+    <a href="https://w3.org" onclick="handler()">браузер откроет w3.org</a>
+    <!-- 2 -->
+    <fieldset id="contents">
+        <legend>#contents</legend>
+        <p>
+            Как насчёт того, чтобы прочитать <a href="https://wikipedia.org">Википедию</a> или посетить <a
+                href="https://w3.org"><i>W3.org</i></a> и узнать о современных стандартах?
+        </p>
+    </fieldset>
+
+    <!-- 3 -->
+    <p><img id="largeImg" src="https://en.js.cx/gallery/img1-lg.jpg" alt="Large image"></p>
+
+    <ul id="thumbs">
+        <!-- браузер показывает небольшую встроенную подсказку из атрибута "title" при наведении курсора на текст -->
+        <li>
+            <a href="https://en.js.cx/gallery/img2-lg.jpg" title="Image 2"><img
+                    src="https://en.js.cx/gallery/img2-thumb.jpg"></a>
+        </li>
+        <li>
+            <a href="https://en.js.cx/gallery/img3-lg.jpg" title="Image 3"><img
+                    src="https://en.js.cx/gallery/img3-thumb.jpg"></a>
+        </li>
+        <li>
+            <a href="https://en.js.cx/gallery/img4-lg.jpg" title="Image 4"><img
+                    src="https://en.js.cx/gallery/img4-thumb.jpg"></a>
+        </li>
+        <li>
+            <a href="https://en.js.cx/gallery/img5-lg.jpg" title="Image 5"><img
+                    src="https://en.js.cx/gallery/img5-thumb.jpg"></a>
+        </li>
+        <li>
+            <a href="https://en.js.cx/gallery/img6-lg.jpg" title="Image 6"><img
+                    src="https://en.js.cx/gallery/img6-thumb.jpg"></a>
+        </li>
+    </ul>
+    <script>
+        // #1_
+        // Почему в коде ниже return false не работает?
+        function handler() {
+            alert("...");
+            return false;
+        }
+        // Браузер переходит по указанной ссылке, но нам этого не нужно.
+        // Как поправить?
+
+        // Answer
+
+        <a href="https://w3.org" onclick="return handler()">w3.org</a>// возвращаем ответ функции
+        // Когда браузер считывает атрибут on*, например onclick, он создаёт 
+        //функцию-обработчик с содержимым этого атрибута в качестве тела функции.
+        // Сейчас нам видно, что возвращаемое значение handler() не используется и не влияет на результат.
+
+        // №2_
+        // Сделайте так, чтобы при клике на ссылки внутри элемента id="contents" пользователю выводился вопрос
+        //  о том, действительно ли он хочет покинуть страницу, и если он не хочет, 
+        //  то прерывать переход по ссылке.
+
+        contents.onclick = function (event) {
+
+            function handleLink(href) {
+                let isLeaving = confirm(`Leave for ${href}?`);
+                if (!isLeaving) return false;
+            }
+
+            let target = event.target.closest('a');
+
+            if (target && contents.contains(target)) {
+                return handleLink(target.getAttribute('href'));
+            }
+        };
+
+        // №3
+        // Создайте галерею изображений,
+        //  в которой основное изображение изменяется при клике на уменьшенный вариант.
+        thumbs.onclick = function (event) {
+            let thumbnail = event.target.closest('a');
+
+            if (!thumbnail) return;
+            showThumbnail(thumbnail.href, thumbnail.title);
+            event.preventDefault();
+        }
+
+        function showThumbnail(href, title) {
+            largeImg.src = href;
+            largeImg.alt = title;
+        }
+    </script>
+</body>
+
+</html>

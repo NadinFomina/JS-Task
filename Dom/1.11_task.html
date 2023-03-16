@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // #1_Найдите координаты точек относительно окна браузера
+        // 1.1 верхний левый, внешний угол (это просто).
+        // 1.2   нижний правый, внешний угол (тоже просто).
+        //1.3 верхний левый, внутренний угол (чуть сложнее).
+        //1.4 нижний правый, внутренний угол (есть несколько способов, выберите один).
+        let coords = elem.getBoundingClientRect();
+
+        let answer1 = [coords.left, coords.top];
+        let answer2 = [coords.right, coords.bottom];
+
+        let answer3 = [coords.left + field.clientLeft, coords.top + field.clientTop];
+
+        let answer4 = [
+            coords.left + elem.clientLeft + elem.clientWidth,
+            coords.top + elem.clientTop + elem.clientHeight
+        ];
+
+        //#2
+        //Покажите заметку рядом с элементом
+        function positionAt(anchor, position, elem) {
+
+            let anchorCoords = anchor.getBoundingClientRect();
+
+            switch (position) {
+                case "top":
+                    elem.style.left = anchorCoords.left + "px";
+                    elem.style.top = anchorCoords.top - elem.offsetHeight + "px";
+                    break;
+
+                case "right":
+                    elem.style.left = anchorCoords.left + anchor.offsetWidth + "px";
+                    elem.style.top = anchorCoords.top + "px";
+                    break;
+
+                case "bottom":
+                    elem.style.left = anchorCoords.left + "px";
+                    elem.style.top = anchorCoords.top + anchor.offsetHeight + "px";
+                    break;
+            }
+
+        }
+
+        /**
+        * Показывает заметку с заданным содержимым на заданной позиции
+        * относительно элемента anchor.
+        */
+        function showNote(anchor, position, html) {
+
+            let note = document.createElement('div');
+            note.className = "note";
+            note.innerHTML = html;
+            document.body.append(note);
+
+            positionAt(anchor, position, note);
+        }
+
+        // проверка
+        let blockquote = document.querySelector('blockquote');
+
+        showNote(blockquote, "top", "note above");
+        showNote(blockquote, "right", "note at the right");
+        showNote(blockquote, "bottom", "note below");
+
+        //#3
+        //Покажите заметку около элемента (абсолютное позиционирование)
+        //         Измените код решения предыдущего задания так, чтобы элемент заметки использовал
+        //          свойство position:absolute вместо position:fixed.
+        // Это предотвратит расхождение элементов при прокрутке страницы.
+        // Используйте решение предыдущего задания для начала. 
+        // Чтобы проверить решение в условиях с прокруткой, добавьте стиль элементу <body style="height: 2000px">.
+        function getCoords(elem) {
+            let box = elem.getBoundingClientRect();
+
+            return {
+                top: box.top + pageYOffset,
+                left: box.left + pageXOffset
+            };
+        }
+
+        function positionAt(anchor, position, elem) {
+
+            let anchorCoords = getCoords(anchor);
+
+            switch (position) {
+                case "top":
+                    elem.style.left = anchorCoords.left + "px";
+                    elem.style.top = anchorCoords.top - elem.offsetHeight + "px";
+                    break;
+
+                case "right":
+                    elem.style.left = anchorCoords.left + anchor.offsetWidth + "px";
+                    elem.style.top = anchorCoords.top + "px";
+                    break;
+
+                case "bottom":
+                    elem.style.left = anchorCoords.left + "px";
+                    elem.style.top = anchorCoords.top + anchor.offsetHeight + "px";
+                    break;
+            }
+
+        }
+
+        function showNote(anchor, position, html) {
+
+            let note = document.createElement('div');
+            note.className = "note";
+            note.innerHTML = html;
+            document.body.append(note);
+
+            positionAt(anchor, position, note);
+        }
+
+        // проверка
+        let blockquote2 = document.querySelector('blockquote');
+
+        showNote(blockquote2, "top", "note above");
+        showNote(blockquote2, "right", "note at the right");
+        showNote(blockquote2, "bottom", "note below");
+
+        //#4
+        //Расположите заметку внутри элемента (абсолютное позиционирование)
+        function getCoords(elem) {
+            let box = elem.getBoundingClientRect();
+
+            return {
+                top: box.top + pageYOffset,
+                left: box.left + pageXOffset
+            };
+        }
+
+        function showNote(anchor, position, html) {
+
+            let note = document.createElement('div');
+            note.className = "note";
+            note.innerHTML = html;
+            document.body.append(note);
+
+            positionAt(anchor, position, note);
+        }
+
+        function positionAt(anchor, position, elem) {
+
+            let anchorCoords = getCoords(anchor);
+
+            switch (position) {
+                case "top-out":
+                    elem.style.left = anchorCoords.left + "px";
+                    elem.style.top = anchorCoords.top - elem.offsetHeight + "px";
+                    break;
+
+                case "right-out":
+                    elem.style.left = anchorCoords.left + anchor.offsetWidth + "px";
+                    elem.style.top = anchorCoords.top + "px";
+                    break;
+
+                case "bottom-out":
+                    elem.style.left = anchorCoords.left + "px";
+                    elem.style.top = anchorCoords.top + anchor.offsetHeight + "px";
+                    break;
+
+                case "top-in":
+                    elem.style.left = anchorCoords.left + "px";
+                    elem.style.top = anchorCoords.top + "px";
+                    break;
+
+                case "right-in":
+                    elem.style.width = '150px';
+                    elem.style.left = anchorCoords.left + anchor.offsetWidth - elem.offsetWidth + "px";
+                    elem.style.top = anchorCoords.top + "px";
+                    break;
+
+                case "bottom-in":
+                    elem.style.left = anchorCoords.left + "px";
+                    elem.style.top = anchorCoords.top + anchor.offsetHeight - elem.offsetHeight + "px";
+                    break;
+            }
+
+        }
+
+
+        let blockquote3 = document.querySelector('blockquote');
+
+        showNote(blockquote3, "top-in", "note top-in");
+        showNote(blockquote3, "top-out", "note top-out");
+        showNote(blockquote3, "right-out", "note right-out");
+        showNote(blockquote3, "bottom-in", "note bottom-in");
+
+    </script>
+</body>
+
+</html>
